@@ -52,6 +52,8 @@ const string terminationToken = "yes";
 var influencerAgent = Influencer.CreateAgent(kernel);
 var writerAgent = Writer.CreateAgent(kernel);
 
+//Can be used to select the next agent in the sequence when selection sequence is not just sequential.
+//For example, if the editor agent should be used to review the output of the other agents. 
 KernelFunction selectionFunction =
             AgentGroupChat.CreatePromptFunctionForStrategy(
                 $$$"""
@@ -95,19 +97,8 @@ AgentGroupChat chat =
             {
                 ExecutionSettings = new AgentGroupChatSettings
                 {
-                    SelectionStrategy =
-                        new KernelFunctionSelectionStrategy(selectionFunction, kernel)
-                        {
-                            // Always start with the writer agent.
-                            InitialAgent = researcherAgent,
-                            // Save tokens by only including the final response
-                            HistoryReducer = historyReducer,
-                            // The prompt variable name for the history argument.
-                            HistoryVariableName = "lastmessage",
-                            // Returns the entire result value as a string.
-                            ResultParser = (result) => result.GetValue<string>() ?? researcherAgent.Name
-                        },
-                    TerminationStrategy =
+                    SelectionStrategy =new SequentialSelectionStrategy(),
+                    TerminationStrategy = 
                         new KernelFunctionTerminationStrategy(terminationFunction, kernel)
                         {
                             // Only evaluate for influencer's response
@@ -123,7 +114,7 @@ AgentGroupChat chat =
                         }
                 }
             };
-chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, "Summer camping trends"));
+chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, "Summer camping trends in 2025"));
 chat.IsComplete = false;
 
 try
