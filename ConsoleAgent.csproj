@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>302c9b82-843e-47a8-9182-421b9ae6584e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Agents\Influencer\article.txt" />
+    <None Remove="Agents\Influencer\customers.json" />
+    <None Remove="Agents\Influencer\influencer.prompty" />
+    <None Remove="Agents\Researcher\researcher.prompty" />
+    <None Remove="Agents\Writer\products.json" />
+    <None Remove="Agents\Writer\research.json" />
+    <None Remove="Agents\Writer\writer.prompty" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Agents\Influencer\article.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Agents\Influencer\customers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Agents\Influencer\influencer.prompty">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Agents\Researcher\researcher.prompty">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Agents\Writer\research.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Agents\Writer\writer.prompty">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.13.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.34.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Abstractions" Version="1.34.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.34.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.OpenAI" Version="1.34.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.Web" Version="1.34.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Prompty" Version="1.34.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Yaml" Version="1.34.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Agents\Writer\products.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="prompt_template.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
